@@ -1,0 +1,193 @@
+{
+  "scopeName": "source.automod",
+  "fileTypes": ["automod"],
+  "embeddedLanguages": {
+    "source.yaml": "yaml"
+  },
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#rule-separator"
+    },
+    {
+      "include": "#top-level-fields"
+    },
+    {
+      "include": "#search-checks"
+    },
+    {
+      "include": "#non-search-checks"
+    },
+    {
+      "include": "#actions"
+    },
+    {
+      "include": "#sub-groups"
+    },
+    {
+      "include": "#standard-conditions"
+    },
+    {
+      "include": "#placeholders"
+    },
+    {
+      "include": "#yaml-structure"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.automod",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "rule-separator": {
+      "patterns": [
+        {
+          "name": "constant.character.separator.automod",
+          "match": "^---$"
+        }
+      ]
+    },
+    "top-level-fields": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(type|priority|moderators_exempt|action|action_reason|comment|comment_locked|comment_stickied|modmail|modmail_subject|message|message_subject|standard):"
+        }
+      ]
+    },
+    "search-checks": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(title|body|domain|url|flair_text|flair_css_class|id|name|media_author|media_author_url|media_title|media_description)(\\s*\\([^)]+\\))?:"
+        }
+      ]
+    },
+    "non-search-checks": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(reports|body_longer_than|body_shorter_than|is_top_level|is_edited|is_original_content|is_poll|is_gallery|discussion_type|is_meta_discussion):"
+        }
+      ]
+    },
+    "actions": {
+      "patterns": [
+        {
+          "name": "keyword.control.automod",
+          "match": "^(approve|remove|spam|filter|report)$"
+        },
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(set_flair|overwrite_flair|set_sticky|set_nsfw|set_spoiler|set_contest_mode|set_original_content|set_suggested_sort|set_locked|report_reason):"
+        }
+      ]
+    },
+    "sub-groups": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(author|crosspost_author|crosspost_subreddit|parent_submission|subreddit):"
+        },
+        {
+          "name": "entity.name.tag.automod",
+          "match": "^(comment_karma|post_karma|combined_karma|comment_subreddit_karma|post_subreddit_karma|combined_subreddit_karma|account_age|satisfy_any_threshold|has_verified_email|is_gold|is_submitter|is_contributor|is_moderator|contributor_quality):"
+        }
+      ]
+    },
+    "standard-conditions": {
+      "patterns": [
+        {
+          "name": "constant.language.automod",
+          "match": "^(image hosting sites|video hosting sites|direct image links|streaming sites|crowdfunding sites|meme generator sites|facebook links|amazon affiliate links)$"
+        }
+      ]
+    },
+    "placeholders": {
+      "patterns": [
+        {
+          "name": "variable.parameter.automod",
+          "match": "\\{\\{[^}]+\\}\\}"
+        }
+      ]
+    },
+    "yaml-structure": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.yaml",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.yaml",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.regexp",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#regex-patterns"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.yaml",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.yaml",
+              "match": "''"
+            }
+          ]
+        },
+        {
+          "name": "string.unquoted.yaml",
+          "match": "\\|"
+        },
+        {
+          "name": "constant.numeric.yaml",
+          "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "constant.language.boolean.yaml",
+          "match": "\\b(true|false|yes|no|on|off)\\b"
+        },
+        {
+          "name": "constant.language.null.yaml",
+          "match": "\\bnull\\b"
+        },
+        {
+          "name": "punctuation.definition.array.begin.yaml",
+          "match": "\\["
+        },
+        {
+          "name": "punctuation.definition.array.end.yaml",
+          "match": "\\]"
+        },
+        {
+          "name": "punctuation.separator.array.yaml",
+          "match": ","
+        }
+      ]
+    },
+    "regex-patterns": {
+      "patterns": [
+        {
+          "name": "string.regexp",
+          "match": "\\\\([\\\\\\.\\[\\]\\{\\}\\(\\)\\*\\+\\?\\|\\^\\$])"
+        }
+      ]
+    }
+  }
+} 

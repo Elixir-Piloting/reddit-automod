@@ -1,0 +1,33 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# VSCE packaging artifacts
+*.vsix
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# VS Code workspace settings
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Build outputs
+out/
+dist/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Env files
+.env
+.env.local

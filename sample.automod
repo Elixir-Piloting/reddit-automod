@@ -1,0 +1,135 @@
+---
+# Sample AutoModerator Configuration
+# This file demonstrates the various features of AutoModerator
+
+# ========================================
+# 1. New User Protection
+# ========================================
+---
+# Filter content from new users with low karma
+author:
+    comment_karma: "< 10"
+    post_karma: "< 5"
+    account_age: "< 7 days"
+action: filter
+action_reason: "New user with low karma"
+modmail: |
+    New user content filtered for review:
+    - Author: /u/{{author}}
+    - Karma: {{author_comment_karma}} comment, {{author_post_karma}} post
+    - Account age: {{author_account_age}}
+
+# ========================================
+# 2. Domain Management
+# ========================================
+---
+# Block spam domains
+domain: ["spam.com", "malware.com", "phishing.com"]
+action: spam
+action_reason: "Spam domain [{{match}}]"
+
+# Approve trusted domains
+domain: ["youtube.com", "imgur.com", "reddit.com"]
+action: approve
+action_reason: "Trusted domain [{{match}}]"
+
+# Use standard conditions for image hosting
+standard: image hosting sites
+action: approve
+action_reason: "Approved image host"
+
+# ========================================
+# 3. Content Quality Control
+# ========================================
+---
+# Remove very short comments
+type: comment
+body_shorter_than: 10
+is_top_level: true
+action: remove
+action_reason: "Low-effort comment"
+
+# Filter offensive content
+title+body (regex): ["offensive.*word", "hate.*speech"]
+action: filter
+action_reason: "Inappropriate content"
+
+# Filter spam patterns
+body (regex): ["buy.*now", "click.*here", "limited.*time"]
+action: filter
+action_reason: "Possible spam"
+
+# ========================================
+# 4. Report Handling
+# ========================================
+---
+# Handle reported content
+reports: 2
+action: filter
+action_reason: "Multiple reports"
+modmail: |
+    Content with multiple reports:
+    - Author: /u/{{author}}
+    - Reports: {{reports}}
+    - Link: {{permalink}}
+
+# ========================================
+# 5. Flair Assignment
+# ========================================
+---
+# Auto-assign flair based on content
+title: ["discussion", "question", "help"]
+set_flair: ["Discussion", "discussion"]
+
+domain: ["youtube.com", "vimeo.com"]
+set_flair: ["Video", "video"]
+
+# Set flair for text posts
+type: text submission
+set_flair: ["Text Post", "text"]
+
+# ========================================
+# 6. Trusted User Benefits
+# ========================================
+---
+# Auto-approve content from trusted users
+author:
+    comment_karma: "> 1000"
+    post_karma: "> 100"
+    account_age: "> 30 days"
+action: approve
+action_reason: "Trusted user"
+
+# ========================================
+# 7. Comment Moderation
+# ========================================
+---
+# Remove username mentions (pings)
+type: comment
+body (regex): ["\\bu/\\w+"]
+action: remove
+action_reason: "Username mention not allowed"
+
+# Lock comments on controversial posts
+parent_submission:
+    reports: 3
+set_locked: true
+modmail: |
+    Comments locked on controversial submission:
+    - Title: {{title}}
+    - Author: /u/{{author}}
+
+# ========================================
+# 8. Emergency Rules
+# ========================================
+---
+# Emergency content removal
+title+body (regex): ["emergency.*keyword", "urgent.*removal"]
+action: remove
+action_reason: "Emergency removal"
+modmail: |
+    EMERGENCY: Content automatically removed
+    - Author: /u/{{author}}
+    - Content: {{title}}
+    - Link: {{permalink}}
+--- 

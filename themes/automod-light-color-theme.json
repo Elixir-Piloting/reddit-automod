@@ -1,0 +1,191 @@
+{
+  "name": "AutoModerator Light",
+  "type": "light",
+  "colors": {
+    "editor.background": "#ffffff",
+    "editor.foreground": "#1e1e1e",
+    "editor.lineHighlightBackground": "#f8f8f8",
+    "editor.selectionBackground": "#add6ff",
+    "editor.inactiveSelectionBackground": "#e5ebf1"
+  },
+  "tokenColors": [
+    {
+      "name": "Comments",
+      "scope": "comment.line.number-sign.automod",
+      "settings": {
+        "foreground": "#008000",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Rule Separators",
+      "scope": "constant.character.separator.automod",
+      "settings": {
+        "foreground": "#d73a49",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Top-Level Fields",
+      "scope": "entity.name.tag.automod",
+      "settings": {
+        "foreground": "#0550ae",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Actions",
+      "scope": "keyword.control.automod",
+      "settings": {
+        "foreground": "#cf222e",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Standard Conditions",
+      "scope": "constant.language.automod",
+      "settings": {
+        "foreground": "#953800",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Placeholders",
+      "scope": "variable.parameter.automod",
+      "settings": {
+        "foreground": "#d97706",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Strings",
+      "scope": "string.quoted.double.yaml",
+      "settings": {
+        "foreground": "#032f62"
+      }
+    },
+    {
+      "name": "Single Quotes",
+      "scope": "string.quoted.single.yaml",
+      "settings": {
+        "foreground": "#032f62"
+      }
+    },
+    {
+      "name": "Numbers",
+      "scope": "constant.numeric.yaml",
+      "settings": {
+        "foreground": "#116329"
+      }
+    },
+    {
+      "name": "Booleans",
+      "scope": "constant.language.boolean.yaml",
+      "settings": {
+        "foreground": "#0550ae",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Null Values",
+      "scope": "constant.language.null.yaml",
+      "settings": {
+        "foreground": "#0550ae",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Arrays",
+      "scope": "punctuation.definition.array.begin.yaml",
+      "settings": {
+        "foreground": "#24292f"
+      }
+    },
+    {
+      "name": "Array End",
+      "scope": "punctuation.definition.array.end.yaml",
+      "settings": {
+        "foreground": "#24292f"
+      }
+    },
+    {
+      "name": "Array Separators",
+      "scope": "punctuation.separator.array.yaml",
+      "settings": {
+        "foreground": "#24292f"
+      }
+    },
+    {
+      "name": "YAML Block",
+      "scope": "string.unquoted.yaml",
+      "settings": {
+        "foreground": "#032f62"
+      }
+    },
+    {
+      "name": "Regex Patterns",
+      "scope": "string.regexp",
+      "settings": {
+        "foreground": "#953800",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Keywords",
+      "scope": "keyword.other",
+      "settings": {
+        "foreground": "#0550ae"
+      }
+    },
+    {
+      "name": "Operators",
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#24292f"
+      }
+    },
+    {
+      "name": "Variables",
+      "scope": "variable",
+      "settings": {
+        "foreground": "#953800"
+      }
+    },
+    {
+      "name": "Functions",
+      "scope": "entity.name.function",
+      "settings": {
+        "foreground": "#8250df"
+      }
+    },
+    {
+      "name": "Classes",
+      "scope": "entity.name.class",
+      "settings": {
+        "foreground": "#0550ae"
+      }
+    },
+    {
+      "name": "Types",
+      "scope": "entity.name.type",
+      "settings": {
+        "foreground": "#0550ae"
+      }
+    },
+    {
+      "name": "Constants",
+      "scope": "constant",
+      "settings": {
+        "foreground": "#0550ae"
+      }
+    },
+    {
+      "name": "Escape Characters",
+      "scope": "constant.character.escape.yaml",
+      "settings": {
+        "foreground": "#953800",
+        "fontStyle": "bold"
+      }
+    }
+  ]
+} 

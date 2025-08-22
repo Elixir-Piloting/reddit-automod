@@ -1,0 +1,319 @@
+{
+  "Basic Rule": {
+    "prefix": "rule",
+    "body": [
+      "---",
+      "# ${1:Rule Description}",
+      "",
+      "# Rule conditions",
+      "title: [\"${2:keyword1}\", \"${3:keyword2}\"]",
+      "body: [\"${4:spam phrase}\", \"${5:offensive word}\"]",
+      "",
+      "# Action to take",
+      "action: ${6|remove,filter,spam,approve,report|}",
+      "action_reason: \"${7:Reason for action}\"",
+      "",
+      "# Optional: Add a comment explaining the removal",
+      "comment: |",
+      "    Your {{kind}} was removed because it violates our community guidelines.",
+      "    Please review the rules before posting again.",
+      "",
+      "# Optional: Send a message to the author",
+      "message: |",
+      "    Your {{kind}} in /r/{{subreddit}} was removed for violating our community guidelines.",
+      "    Please review the rules before posting again.",
+      "",
+      "# Optional: Notify moderators",
+      "modmail: |",
+      "    The above {{kind}} by /u/{{author}} was automatically removed.",
+      "    Please review if this action was correct.",
+      "---"
+    ],
+    "description": "Create a basic AutoModerator rule"
+  },
+  "Domain Blacklist": {
+    "prefix": "domain-blacklist",
+    "body": [
+      "---",
+      "# Domain Blacklist Rule",
+      "# Remove submissions from specific domains",
+      "",
+      "# Block specific domains",
+      "domain: [\"${1:spam.com}\", \"${2:malware.com}\", \"${3:phishing.com}\"]",
+      "action: spam",
+      "action_reason: \"Spam domain [{{match}}]\"",
+      "",
+      "# Optional: Also check title and body for these domains",
+      "domain+body+title: [\"${4:badwebsite.com}\", \"${5:scam.com}\"]",
+      "action: filter",
+      "action_reason: \"Suspicious domain [{{match}}]\"",
+      "",
+      "# Optional: Send modmail for review",
+      "modmail: |",
+      "    A submission from a blacklisted domain was removed:",
+      "    - Domain: {{domain}}",
+      "    - Author: /u/{{author}}",
+      "    - Title: {{title}}",
+      "---"
+    ],
+    "description": "Create a domain blacklist rule"
+  },
+  "User Karma Check": {
+    "prefix": "karma-check",
+    "body": [
+      "---",
+      "# User Karma Check Rule",
+      "# Filter content from users with low karma or new accounts",
+      "",
+      "# Check user karma and account age",
+      "author:",
+      "    comment_karma: \"< ${1:10}\"",
+      "    post_karma: \"< ${2:5}\"",
+      "    account_age: \"< ${3:7} days\"",
+      "action: filter",
+      "action_reason: \"New user with low karma\"",
+      "",
+      "# Optional: Different action for very new accounts",
+      "author:",
+      "    account_age: \"< ${4:1} days\"",
+      "action: remove",
+      "action_reason: \"Brand new account\"",
+      "",
+      "# Optional: Approve content from trusted users",
+      "author:",
+      "    comment_karma: \"> ${5:1000}\"",
+      "    post_karma: \"> ${6:100}\"",
+      "    account_age: \"> ${7:30} days\"",
+      "action: approve",
+      "action_reason: \"Trusted user\"",
+      "---"
+    ],
+    "description": "Create a user karma check rule"
+  },
+  "Content Filter": {
+    "prefix": "content-filter",
+    "body": [
+      "---",
+      "# Content Filter Rule",
+      "# Filter content based on keywords or patterns",
+      "",
+      "# Filter offensive language",
+      "title+body (regex): [\"${1:badword1}\", \"${2:badword2}\", \"${3:offensive.*phrase}\"]",
+      "action: filter",
+      "action_reason: \"Inappropriate content\"",
+      "",
+      "# Filter spam patterns",
+      "body (regex): [\"${4:buy.*now}\", \"${5:click.*here}\", \"${6:limited.*time}\"]",
+      "action: filter",
+      "action_reason: \"Possible spam\"",
+      "",
+      "# Filter short/low-effort content",
+      "body_shorter_than: ${7:10}",
+      "is_top_level: true",
+      "action: remove",
+      "action_reason: \"Low-effort comment\"",
+      "",
+      "# Optional: Use standard conditions",
+      "standard: ${8|image hosting sites,video hosting sites,direct image links,streaming sites,crowdfunding sites,meme generator sites,facebook links,amazon affiliate links|}",
+      "action: approve",
+      "action_reason: \"Approved content type\"",
+      "---"
+    ],
+    "description": "Create a content filter rule"
+  },
+  "Flair Assignment": {
+    "prefix": "flair",
+    "body": [
+      "---",
+      "# Flair Assignment Rule",
+      "# Automatically assign flair based on content",
+      "",
+      "# Assign flair based on keywords in title",
+      "title: [\"${1:discussion}\", \"${2:question}\", \"${3:help}\"]",
+      "set_flair: [\"${4:Discussion}\", \"${5:discussion}\"]",
+      "",
+      "# Assign flair based on domain",
+      "domain: [\"${6:youtube.com}\", \"${7:vimeo.com}\"]",
+      "set_flair: [\"${8:Video}\", \"${9:video}\"]",
+      "",
+      "# Assign flair based on content type",
+      "type: text submission",
+      "set_flair: [\"${10:Text Post}\", \"${11:text}\"]",
+      "",
+      "# Optional: Set user flair for trusted contributors",
+      "author:",
+      "    comment_karma: \"> ${12:500}\"",
+      "    set_flair: [\"${13:Trusted User}\", \"${14:trusted}\"]",
+      "",
+      "# Optional: Overwrite existing flair",
+      "overwrite_flair: true",
+      "---"
+    ],
+    "description": "Create a flair assignment rule"
+  },
+  "Report Handler": {
+    "prefix": "reports",
+    "body": [
+      "---",
+      "# Report Handler Rule",
+      "# Handle content that receives multiple reports",
+      "",
+      "# Filter content with multiple reports",
+      "reports: ${1:2}",
+      "action: filter",
+      "action_reason: \"Multiple reports\"",
+      "modmail: |",
+      "    The above {{kind}} by /u/{{author}} has received multiple reports.",
+      "    Please investigate.",
+      "",
+      "# Different action for more reports",
+      "reports: ${2:5}",
+      "action: remove",
+      "action_reason: \"Heavily reported content\"",
+      "modmail: |",
+      "    The above {{kind}} by /u/{{author}} has received 5+ reports.",
+      "    Immediate attention required.",
+      "",
+      "# Optional: Auto-approve reported content from trusted users",
+      "author:",
+      "    comment_karma: \"> ${3:1000}\"",
+      "reports: 1",
+      "action: approve",
+      "action_reason: \"Approve reported content from trusted user\"",
+      "---"
+    ],
+    "description": "Create a report handler rule"
+  },
+  "Comment Moderation": {
+    "prefix": "comment",
+    "body": [
+      "---",
+      "# Comment Moderation Rule",
+      "# Moderate comments specifically",
+      "",
+      "type: comment",
+      "",
+      "# Remove short/low-effort comments",
+      "body_shorter_than: ${1:10}",
+      "is_top_level: true",
+      "action: remove",
+      "action_reason: \"Low-effort comment\"",
+      "",
+      "# Filter offensive comments",
+      "body (regex): [\"${2:offensive.*word}\", \"${3:hate.*speech}\"]",
+      "action: filter",
+      "action_reason: \"Inappropriate comment\"",
+      "",
+      "# Remove username mentions (pings)",
+      "body (regex): [\"\\\\bu/\\\\w+\"]",
+      "action: remove",
+      "action_reason: \"Username mention not allowed\"",
+      "",
+      "# Optional: Lock comments on controversial posts",
+      "parent_submission:",
+      "    reports: ${4:3}",
+      "set_locked: true",
+      "modmail: |",
+      "    Comments locked on controversial submission:",
+      "    - Title: {{title}}",
+      "    - Author: /u/{{author}}",
+      "---"
+    ],
+    "description": "Create a comment moderation rule"
+  },
+  "Standard Condition": {
+    "prefix": "standard",
+    "body": [
+      "standard: ${1|image hosting sites,video hosting sites,direct image links,streaming sites,crowdfunding sites,meme generator sites,facebook links,amazon affiliate links|}",
+      "action: ${2|approve,remove,filter,spam,report|}",
+      "action_reason: \"${3:Standard condition [{{match}}]}\""
+    ],
+    "description": "Use a standard AutoModerator condition"
+  },
+  "Author Sub-group": {
+    "prefix": "author",
+    "body": [
+      "author:",
+      "    ${1:comment_karma}: \"${2:< 10}\"",
+      "    ${3:post_karma}: \"${4:< 5}\"",
+      "    ${5:account_age}: \"${6:< 7 days}\"",
+      "    ${7:has_verified_email}: ${8|true,false|}",
+      "    ${9:is_contributor}: ${10|true,false|}",
+      "    ${11:is_moderator}: ${12|true,false|}",
+      "action: ${13|filter,remove,approve|}",
+      "action_reason: \"${14:Author check}\""
+    ],
+    "description": "Create an author sub-group check"
+  },
+  "Search Check": {
+    "prefix": "search",
+    "body": [
+      "${1:title}+${2:body} (${3|includes,includes-word,starts-with,ends-with,full-exact,full-text,regex|}): [\"${4:keyword1}\", \"${5:keyword2}\"]",
+      "action: ${6|remove,filter,spam,approve,report|}",
+      "action_reason: \"${7:Search match [{{match}}]}\""
+    ],
+    "description": "Create a search check rule"
+  },
+  "Multi-line Comment": {
+    "prefix": "comment-multi",
+    "body": [
+      "comment: |",
+      "    ${1:Your {{kind}} was removed because it violates our community guidelines.}",
+      "    ${2:Please review the rules before posting again.}",
+      "    ${3:If you believe this was a mistake, please contact the moderators.}"
+    ],
+    "description": "Create a multi-line comment"
+  },
+  "Modmail": {
+    "prefix": "modmail",
+    "body": [
+      "modmail: |",
+      "    ${1:The above {{kind}} by /u/{{author}} was automatically removed.}",
+      "    ${2:Please review if this action was correct.}",
+      "    ${3:Link: {{permalink}}"
+    ],
+    "description": "Create a modmail notification"
+  },
+  "Placeholder": {
+    "prefix": "placeholder",
+    "body": [
+      "{{${1|author,author_flair_text,author_flair_css_class,body,permalink,subreddit,kind,title,domain,url,match,media_author,media_title,media_description}}}"
+    ],
+    "description": "Insert an AutoModerator placeholder"
+  },
+  "Action Block": {
+    "prefix": "action",
+    "body": [
+      "action: ${1|approve,remove,spam,filter,report|}",
+      "action_reason: \"${2:Reason for action}\"",
+      "${3:comment: |}",
+      "${4:    Your {{kind}} was removed because it violates our community guidelines.}"
+    ],
+    "description": "Create an action block"
+  },
+  "Priority Rule": {
+    "prefix": "priority",
+    "body": [
+      "priority: ${1:1}",
+      "# Higher priority rules are checked first"
+    ],
+    "description": "Set rule priority"
+  },
+  "Type Specification": {
+    "prefix": "type",
+    "body": [
+      "type: ${1|comment,submission,text submission,link submission,crosspost submission,poll submission,gallery submission,any|}",
+      "# Specify what type of content this rule applies to"
+    ],
+    "description": "Specify content type"
+  },
+  "Regex Pattern": {
+    "prefix": "regex",
+    "body": [
+      "${1:title} (regex): [\"${2:\\\\[.*\\\\]}\", \"${3:pattern2}\"]",
+      "action: ${4|remove,filter,spam,approve,report|}",
+      "action_reason: \"${5:Regex match [{{match}}]}\""
+    ],
+    "description": "Create a regex pattern check"
+  }
+} 

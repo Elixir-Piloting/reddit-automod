@@ -1,0 +1,155 @@
+{
+  "name": "automoderator",
+  "displayName": "AutoModerator",
+  "description": "Enhanced AutoModerator support for VSCode with syntax highlighting, IntelliSense, snippets, and scaffolding",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "automoderator",
+    "reddit",
+    "yaml",
+    "moderation",
+    "syntax"
+  ],
+  "activationEvents": [
+    "onLanguage:automod",
+    "onLanguage:yaml",
+    "onCommand:automoderator.createScaffold"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "automod",
+        "aliases": [
+          "AutoModerator",
+          "automod"
+        ],
+        "extensions": [
+          ".automod"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "automod",
+        "scopeName": "source.automod",
+        "path": "./syntaxes/automod.tmLanguage.json",
+        "embeddedLanguages": {
+          "source.yaml": "yaml"
+        }
+      }
+    ],
+    "themes": [
+      {
+        "label": "AutoModerator Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/automod-dark-color-theme.json"
+      },
+      {
+        "label": "AutoModerator Light",
+        "uiTheme": "vs",
+        "path": "./themes/automod-light-color-theme.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "automod",
+        "scopeName": "source.automod",
+        "path": "./syntaxes/automod.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "automod",
+        "path": "./snippets/automod.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "automoderator.createScaffold",
+        "title": "Create AutoModerator Scaffold",
+        "category": "AutoModerator"
+      },
+      {
+        "command": "automoderator.formatDocument",
+        "title": "Format AutoModerator Document",
+        "category": "AutoModerator"
+      },
+      {
+        "command": "automoderator.toggleAggressiveIntelliSense",
+        "title": "Toggle Aggressive IntelliSense",
+        "category": "AutoModerator"
+      },
+      {
+        "command": "automoderator.switchToDarkTheme",
+        "title": "Switch to AutoModerator Dark Theme",
+        "category": "AutoModerator"
+      },
+      {
+        "command": "automoderator.switchToLightTheme",
+        "title": "Switch to AutoModerator Light Theme",
+        "category": "AutoModerator"
+      }
+    ],
+    "configuration": {
+      "title": "AutoModerator",
+      "properties": {
+        "automoderator.enableIntelliSense": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable IntelliSense for AutoModerator files"
+        },
+        "automoderator.enableHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable hover documentation for AutoModerator files"
+        },
+        "automoderator.formatOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Format AutoModerator files on save"
+        },
+        "automoderator.aggressiveIntelliSense": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable aggressive IntelliSense (triggers on Enter)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/js-yaml": "^4.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.39.0",
+    "glob": "^10.2.6",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "prettier": "^3.0.0"
+  }
+} 
