@@ -1,8 +1,8 @@
 {
   "repository": {
-  "type": "git",
-  "url": "https://github.com/Elixir-Piloting/reddit-automod.git"
-},
+    "type": "git",
+    "url": "https://github.com/Elixir-Piloting/reddit-automod.git"
+  },
   "name": "automoderator",
   "displayName": "Reddit Automod",
   "publisher": "ElixirPiloting",
@@ -25,7 +25,7 @@
     "moderation",
     "syntax"
   ],
-  "icon": "icon.png",             
+  "icon": "icon.png",
   "activationEvents": [
     "onLanguage:automod",
     "onLanguage:yaml",
@@ -126,13 +126,18 @@
         }
       }
     },
-    "iconThemes": [                            
-      {
-        "id": "automod-icons",
-        "label": "AutoModerator Icons",
-        "path": "./fileicons/automod-icon-theme.json"
+    "fileIcons": {
+      "id": "automod-file-icons",
+      "label": "AutoModerator File Icons",
+      "iconDefinitions": {
+        "file": {
+          "iconPath": "./images/automod-file.svg"
+        }
+      },
+      "fileExtensions": {
+        "automod": "file"
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
