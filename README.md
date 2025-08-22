@@ -172,7 +172,7 @@ MIT License - see LICENSE file for details
 
 ## Support
 
-If you encounter any issues or have feature requests, please open an issue on the GitHub repository.
+If you encounter any issues or have feature requests, please open an issue on the [GitHub repository](https://github.com/Elixir-Piloting/reddit-automod).
 
 ## Acknowledgments
 

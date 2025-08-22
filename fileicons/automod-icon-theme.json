@@ -1,0 +1,11 @@
+{
+    "iconDefinitions": {
+      "_automod": {
+        "iconPath": "./automod-icon.svg"
+      }
+    },
+    "fileExtensions": {
+      "automod": "_automod"
+    }
+  }
+  
