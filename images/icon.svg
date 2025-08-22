@@ -1,0 +1,22 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#grad1)" stroke="#CC3700" stroke-width="4"/>
+  
+  <!-- Shield shape for moderation -->
+  <path d="M64 20 L90 35 L90 65 C90 85 78 95 64 105 C50 95 38 85 38 65 L38 35 Z" 
+        fill="white" stroke="#CC3700" stroke-width="2"/>
+  
+  <!-- Checkmark for approval -->
+  <path d="M50 65 L60 75 L78 55" stroke="#00AA00" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- "A" for AutoModerator -->
+  <text x="64" y="85" font-family="Arial, sans-serif" font-size="16" font-weight="bold" 
+        text-anchor="middle" fill="#CC3700">A</text>
+</svg>

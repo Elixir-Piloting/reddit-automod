@@ -1,0 +1,28 @@
+type: submission
+author:
+    account_age: "< 7 days"
+    comment_karma: "< 10"
+action: remove
+action_reason: "action reason goes here"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+type: submission
+author:

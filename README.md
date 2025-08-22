@@ -59,15 +59,30 @@ Use the command `automoderator.createScaffold` (or press `Ctrl+Shift+P` and sear
 - **Complete Config** - Full configuration with multiple rules
 
 ### 📝 Formatting & Auto-Formatting
-- **Format on Save** - Automatically format your AutoModerator files when saving
 - **Manual Formatting** - Use `Ctrl+Shift+P` → "Format AutoModerator Document"
+- **Format on Save** - Optional auto-formatting when saving (disabled by default to prevent conflicts)
 - **Smart Indentation** - Proper YAML-style indentation for all AutoModerator fields
 - **Rule Organization** - Automatically organize and space rules properly
+- **Conflict Prevention** - Built-in safeguards to prevent formatting conflicts with other extensions
 
 ### 📁 File Support
 - Primary support for `.automod` files
 - Also works with `.yml` and `.yaml` files containing AutoModerator content
 - Proper language detection and syntax highlighting
+
+## Recent Fixes (v0.1.1)
+
+### 🐛 Critical Bug Fixes
+- **Fixed infinite line insertion** - Resolved auto-formatting conflicts that caused lines to be repeatedly inserted
+- **Disabled format on save by default** - Prevents conflicts with other formatters and VSCode's built-in formatting
+- **Removed IntelliSense from comments** - No more unwanted suggestions when typing in comment lines (starting with `#`)
+- **Added extension icon** - Proper icon display in VSCode extension marketplace
+- **Removed conflicting file icons** - No longer interferes with other file icon extensions
+
+### ⚡ Performance Improvements
+- **Better error handling** - More robust formatting with proper error catching
+- **Smarter formatting logic** - Only formats when actual changes are needed
+- **Reduced conflicts** - Better integration with VSCode's built-in features
 
 ## Installation
 

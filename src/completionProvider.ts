@@ -7,6 +7,12 @@ export class AutoModeratorCompletionProvider implements vscode.CompletionItemPro
         token: vscode.CancellationToken,
         context: vscode.CompletionContext
     ): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList<vscode.CompletionItem>> {
+        // Check if we're in a comment line - if so, don't provide completions
+        const line = document.lineAt(position);
+        if (line.text.trim().startsWith('#')) {
+            return [];
+        }
+        
         // Check if aggressive IntelliSense is enabled
         const config = vscode.workspace.getConfiguration('automoderator');
         const aggressiveMode = config.get('aggressiveIntelliSense', false);

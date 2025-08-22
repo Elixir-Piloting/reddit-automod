@@ -11,9 +11,25 @@ export class AutoModeratorFormatter implements vscode.DocumentFormattingEditProv
         const edits: vscode.TextEdit[] = [];
 
         try {
+            // Don't format if document is empty or very short
+            if (text.trim().length < 10) {
+                return edits;
+            }
+
             // Split into rules
             const rules = this.parseRules(text);
+            
+            // Don't format if there are no valid rules
+            if (rules.length === 0) {
+                return edits;
+            }
+            
             const formattedRules = this.formatRules(rules, options);
+            
+            // Only apply formatting if there are actual changes
+            if (formattedRules.trim() === text.trim()) {
+                return edits;
+            }
             
             // Replace entire document
             const fullRange = new vscode.Range(
@@ -56,7 +72,10 @@ export class AutoModeratorFormatter implements vscode.DocumentFormattingEditProv
         
         for (const rule of rules) {
             if (rule.trim()) {
-                formattedRules.push(this.formatRule(rule, options));
+                const formattedRule = this.formatRule(rule, options);
+                if (formattedRule.trim()) {
+                    formattedRules.push(formattedRule);
+                }
             }
         }
         
@@ -81,12 +100,6 @@ export class AutoModeratorFormatter implements vscode.DocumentFormattingEditProv
             
             // Handle comments
             if (trimmed.startsWith('#')) {
-                // Add spacing around section headers
-                if (trimmed.includes('=') || trimmed.includes('-')) {
-                    if (formattedLines.length > 0 && formattedLines[formattedLines.length - 1] !== '') {
-                        formattedLines.push('');
-                    }
-                }
                 formattedLines.push(line);
                 continue;
             }
@@ -136,6 +149,7 @@ export class AutoModeratorFormatter implements vscode.DocumentFormattingEditProv
                     formattedLines.push(indent + key + ':');
                 }
             } else {
+                // Preserve lines that don't match our patterns
                 formattedLines.push(line);
             }
         }

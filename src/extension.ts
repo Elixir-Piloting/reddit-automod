@@ -53,29 +53,21 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
-    // Register theme switching commands
-    const switchToDarkThemeDisposable = vscode.commands.registerCommand(
-        'automoderator.switchToDarkTheme',
-        async () => {
-            await vscode.commands.executeCommand('workbench.action.colorTheme', 'AutoModerator Dark');
-            vscode.window.showInformationMessage('Switched to AutoModerator Dark theme');
-        }
-    );
 
-    const switchToLightThemeDisposable = vscode.commands.registerCommand(
-        'automoderator.switchToLightTheme',
-        async () => {
-            await vscode.commands.executeCommand('workbench.action.colorTheme', 'AutoModerator Light');
-            vscode.window.showInformationMessage('Switched to AutoModerator Light theme');
-        }
-    );
 
-    // Register format on save
+    // Register format on save (disabled by default to prevent conflicts)
     const formatOnSaveDisposable = vscode.workspace.onDidSaveTextDocument((document) => {
         if (document.languageId === 'automod') {
             const config = vscode.workspace.getConfiguration('automoderator');
-            if (config.get('formatOnSave', true)) {
-                vscode.commands.executeCommand('editor.action.formatDocument');
+            if (config.get('formatOnSave', false)) {
+                // Add a small delay to prevent conflicts with other formatters
+                setTimeout(async () => {
+                    try {
+                        await vscode.commands.executeCommand('editor.action.formatDocument');
+                    } catch (err) {
+                        console.error('Format on save error:', err);
+                    }
+                }, 100);
             }
         }
     });
@@ -93,8 +85,6 @@ export function activate(context: vscode.ExtensionContext) {
         formatterDisposable,
         formatCommandDisposable,
         toggleIntelliSenseDisposable,
-        switchToDarkThemeDisposable,
-        switchToLightThemeDisposable,
         formatOnSaveDisposable,
         symbolProvider
     );

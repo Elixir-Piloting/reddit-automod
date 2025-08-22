@@ -7,7 +7,7 @@
   "displayName": "Reddit Automod",
   "publisher": "ElixirPiloting",
   "description": "Enhanced AutoModerator support for VSCode with syntax highlighting, IntelliSense, snippets, and scaffolding",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Steve | Elixir Piloting",
   "license": "MIT",
   "engines": {
@@ -25,7 +25,7 @@
     "moderation",
     "syntax"
   ],
-  "icon": "icon.png",
+  "icon": "images/icon.png",
   "activationEvents": [
     "onLanguage:automod",
     "onLanguage:yaml",
@@ -43,7 +43,11 @@
         "extensions": [
           ".automod"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/automod-icon.svg",
+          "dark": "./images/automod-icon.svg"
+        }
       }
     ],
     "grammars": [
@@ -56,18 +60,7 @@
         }
       }
     ],
-    "themes": [
-      {
-        "label": "AutoModerator Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/automod-dark-color-theme.json"
-      },
-      {
-        "label": "AutoModerator Light",
-        "uiTheme": "vs",
-        "path": "./themes/automod-light-color-theme.json"
-      }
-    ],
+
     "snippets": [
       {
         "language": "automod",
@@ -89,16 +82,6 @@
         "command": "automoderator.toggleAggressiveIntelliSense",
         "title": "Toggle Aggressive IntelliSense",
         "category": "AutoModerator"
-      },
-      {
-        "command": "automoderator.switchToDarkTheme",
-        "title": "Switch to AutoModerator Dark Theme",
-        "category": "AutoModerator"
-      },
-      {
-        "command": "automoderator.switchToLightTheme",
-        "title": "Switch to AutoModerator Light Theme",
-        "category": "AutoModerator"
       }
     ],
     "configuration": {
@@ -116,26 +99,14 @@
         },
         "automoderator.formatOnSave": {
           "type": "boolean",
-          "default": true,
-          "description": "Format AutoModerator files on save"
+          "default": false,
+          "description": "Format AutoModerator files on save (disabled by default to prevent conflicts)"
         },
         "automoderator.aggressiveIntelliSense": {
           "type": "boolean",
           "default": false,
           "description": "Enable aggressive IntelliSense (triggers on Enter)"
         }
-      }
-    },
-    "fileIcons": {
-      "id": "automod-file-icons",
-      "label": "AutoModerator File Icons",
-      "iconDefinitions": {
-        "file": {
-          "iconPath": "./images/automod-file.svg"
-        }
-      },
-      "fileExtensions": {
-        "automod": "file"
       }
     }
   },
