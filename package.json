@@ -4,7 +4,8 @@
   "url": "https://github.com/Elixir-Piloting/reddit-automod.git"
 },
   "name": "automoderator",
-  "displayName": "AutoModerator",
+  "displayName": "Reddit Automod",
+  "publisher": "ElixirPiloting",
   "description": "Enhanced AutoModerator support for VSCode with syntax highlighting, IntelliSense, snippets, and scaffolding",
   "version": "0.1.0",
   "author": "Steve | Elixir Piloting",
